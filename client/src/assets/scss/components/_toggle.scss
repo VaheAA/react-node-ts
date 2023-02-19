@@ -1,0 +1,75 @@
+@use '../util/' as u;
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: u.rem(20);
+  }
+
+
+  &__info {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  &-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &-checkbox:checked+.slider {
+    background-color: var(--sand);
+  }
+
+  &-checkbox:checked+.slider::before {
+    background-color: var(--red);
+  }
+
+  &-checkbox:checked+.slider:before {
+    transform: translateX(26px);
+  }
+
+}
+
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--sand);
+  transition: 0.4s;
+  border-radius: 34px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--blue);
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+}

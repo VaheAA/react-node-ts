@@ -1,0 +1,74 @@
+@use '../util/' as u;
+
+.home {
+  &__inner {
+    display: flex;
+    width: 100%;
+    gap: u.rem(16);
+
+    @include u.breakpoint-down(small) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: u.rem(20);
+    padding: u.rem(5);
+    flex: 2;
+    align-self: baseline;
+
+
+    @include u.breakpoint-down(small) {
+      flex-direction: row;
+      align-self: center;
+    }
+
+
+    img {
+      max-width: u.rem(250);
+      height: 100%;
+      display: block;
+      margin-top: u.rem(35);
+
+      @include u.breakpoint-down(small) {
+        max-width: u.rem(100);
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: u.rem(16);
+    flex: 3;
+  }
+
+  &__disclaimer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    &-text {
+      color: var(--blue);
+      font-size: u.rem(16);
+      margin-top: u.rem(15);
+      line-height: u.rem(28);
+      text-align: justify;
+    }
+
+    &-intro {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+  }
+
+  &__terms {
+    margin-top: u.rem(25);
+  }
+}

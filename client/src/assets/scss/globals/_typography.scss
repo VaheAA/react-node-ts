@@ -1,0 +1,34 @@
+@use '../util/' as u;
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.title {
+  color: var(--blue);
+  text-align: center;
+  font-size: u.rem(36);
+  line-height: u.rem(38);
+  margin-top: u.rem(25);
+  font-weight: 400;
+
+
+  @include u.breakpoint-down(small) {
+    font-size: u.rem(20);
+    line-height: u.rem(27);
+  }
+}
+
+.note__start {
+  font-weight: bold;
+  font-size: 13.5px;
+}

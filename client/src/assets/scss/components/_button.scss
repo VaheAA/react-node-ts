@@ -1,0 +1,50 @@
+@use '../util' as u;
+
+
+
+.btn {
+  min-width: 200px;
+  margin: auto;
+  border: none;
+  border-radius: 25px;
+  padding: 14px 19px;
+  background-color: var(--red);
+  color: white;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 1.1rem;
+  text-decoration: none;
+  display: inline-block;
+  font-family: inherit;
+  text-align: center;
+
+
+  &:hover {
+    background-color: var(--redHover);
+  }
+
+  &-back {
+    display: inline-block;
+    margin: auto;
+    text-align: left;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 18px;
+    text-decoration: underline;
+    color: #01425e;
+  }
+
+  &-label {
+    color: var(--blue);
+    padding: 10px;
+    font-family: inherit;
+    border-radius: 25px;
+    cursor: pointer;
+    max-width: 200px;
+    display: inline-block;
+    text-align: left;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,53 @@
+@use '../util/' as u;
+
+.hint {
+  position: relative;
+  font-weight: bold;
+  display: block;
+  flex: 0 0 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  margin-left: 10px;
+  color: rgb(1, 66, 94, 0.7);
+
+
+  &::after {
+    content: '';
+    position: absolute;
+    border: 1px solid rgb(1, 66, 94, 0.7);
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+  }
+
+  &__text {
+    display: none;
+    position: absolute;
+    top: -15px;
+    left: 35px;
+    width: 280px;
+    max-height: 300px;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px;
+    background-color: var(--white);
+    border-radius: 10px;
+    z-index: 1;
+
+
+    @include u.breakpoint-down(small) {
+      top: 35px;
+      left: -220px;
+      z-index: 10;
+    }
+  }
+
+  &:hover {
+    .hint__text {
+      display: block;
+    }
+  }
+}

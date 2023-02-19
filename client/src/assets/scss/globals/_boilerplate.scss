@@ -1,0 +1,50 @@
+@use '../util' as u;
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: u.$font;
+  background-color: var(--sand);
+  color: var(--team-blue);
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  padding-top: u.rem(90);
+  padding-bottom: u.rem(40);
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.container {
+  width: min(100% - u.rem(40), u.rem(1380));
+  margin-inline: auto;
+
+  &-header {
+    width: min(100% - u.rem(40), u.rem(1440));
+    padding: 20px 5px 5px 20px;
+  }
+}

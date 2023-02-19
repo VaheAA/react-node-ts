@@ -1,0 +1,30 @@
+@use '../util/' as u;
+
+.footer {
+  width: 100%;
+  background-color: var(--blue);
+  padding: 10px 0;
+
+  .contact-us {
+    color: var(--white);
+    width: 100%;
+
+    &__email {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+
+
+      @include u.breakpoint-down(small) {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--white);
+      }
+    }
+  }
+}

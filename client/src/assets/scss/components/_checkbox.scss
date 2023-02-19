@@ -1,0 +1,47 @@
+@use '../util' as u;
+
+.checkbox {
+
+  &__input {
+    display: none;
+
+
+    &:checked+.checkbox__label::after {
+      transform: scale(1);
+    }
+  }
+
+  &__label {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+
+
+    &::before {
+      content: '';
+      align-self: flex-start;
+      flex: 0 0 20px;
+      height: 20px;
+      background-color: var(--white);
+      border-radius: 5px;
+      border: none;
+      margin-right: 10px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      background-color: var(--red);
+      width: 13px;
+      height: 13px;
+      top: 4px;
+      left: 4px;
+      border-radius: 5px;
+      transform: scale(0);
+      transition: all 0.3s ease;
+    }
+  }
+
+}

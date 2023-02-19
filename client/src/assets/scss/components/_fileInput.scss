@@ -1,0 +1,44 @@
+@use '../util' as u;
+
+
+.file {
+  width: 100%;
+
+
+  &-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: u.rem(16);
+  }
+
+  &-label {
+    color: var(--blue);
+    padding: 10px;
+    font-family: inherit;
+    border-radius: 25px;
+    cursor: pointer;
+    max-width: 170px;
+    display: inline-block;
+    text-align: left;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    text-decoration: underline;
+  }
+
+  &-success {
+    font-size: u.rem(16);
+    font-weight: bold;
+    color: var(--green);
+  }
+
+  &-input {
+    display: none;
+  }
+
+  &-delete {
+    width: u.rem(20);
+    cursor: pointer;
+    margin-left: auto;
+  }
+}
