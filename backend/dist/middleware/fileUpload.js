@@ -26,12 +26,12 @@ const fileUpload = (0, multer_1.default)({
         let ext;
         if (file) {
             ext = file.originalname.split('.').pop();
-        }
-        if (ALLOWED_EXTENSIONS.includes(ext)) {
-            cb(null, true);
-        }
-        else {
-            cb(new Error('Invalid file type.'));
+            if (ALLOWED_EXTENSIONS.includes(ext)) {
+                cb(null, true);
+            }
+            else {
+                cb(new Error('Invalid file type.'));
+            }
         }
     }
 });

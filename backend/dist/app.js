@@ -17,6 +17,7 @@ require('dotenv').config();
 require('express-async-errors');
 const express_1 = __importDefault(require("express"));
 const messageRoutes_1 = require("./routes/messageRoutes");
+const userRoutes_1 = require("./routes/userRoutes");
 const errorHandler_1 = __importDefault(require("./middleware/errorHandler"));
 const db_1 = __importDefault(require("./db/db"));
 const i18next_1 = __importDefault(require("i18next"));
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api/message', messageRoutes_1.messageRouter);
+app.use('/api/auth', userRoutes_1.userRouter);
 app.use(errorHandler_1.default);
 const port = process.env.PORT || 3000;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {

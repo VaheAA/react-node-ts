@@ -3,6 +3,7 @@ require('dotenv').config();
 require('express-async-errors');
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { messageRouter } from './routes/messageRoutes';
+import { userRouter } from './routes/userRoutes';
 import errorHandlerMiddleware from './middleware/errorHandler';
 import sequelize from './db/db';
 import i18next from 'i18next';
@@ -35,6 +36,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use('/api/message', messageRouter);
+app.use('/api/auth', userRouter);
 app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3000;

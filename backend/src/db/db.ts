@@ -2,11 +2,11 @@ import { Sequelize } from 'sequelize';
 
 
 const sequelize = new Sequelize(
-  'speakupDB',
-  "root",
-  "#KanekiKen42",
+  process.env.DB_NAME as string,
+  process.env.DB_USERNAME as string,
+  process.env.DB_PASSWORD as string,
   {
-    host: "localhost",
+    host: process.env.DB_HOST,
     dialect: "mysql"
   }
 );

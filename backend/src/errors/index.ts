@@ -3,7 +3,7 @@ import UnauthenticatedError from './unauthenticatedError';
 import CustomAPIError from './customApiError';
 import NotFoundError from './notFoundError';
 
-export = {
+export {
   BadRequestError,
   UnauthenticatedError,
   NotFoundError,

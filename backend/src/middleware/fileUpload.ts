@@ -42,14 +42,15 @@ const fileUpload = multer({
     }
   }),
   fileFilter: (req, file, cb) => {
-    let ext: string | undefined;
+    let ext: string;
     if (file) {
-      ext = file.originalname.split('.').pop();
-    }
-    if (ALLOWED_EXTENSIONS.includes(ext)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Invalid file type.'));
+      ext = file.originalname.split('.').pop() as string;
+
+      if (ALLOWED_EXTENSIONS.includes(ext)) {
+        cb(null, true);
+      } else {
+        cb(new Error('Invalid file type.'));
+      }
     }
   }
 });
