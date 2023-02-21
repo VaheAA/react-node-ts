@@ -24,6 +24,8 @@ app.use(i18nMiddleware.handle(i18next));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/uploads/files', express.static(path.join('uploads', 'files')));
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(

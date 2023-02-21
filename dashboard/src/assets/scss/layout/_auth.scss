@@ -1,0 +1,56 @@
+@use '../util' as u;
+
+
+.auth {
+  width: u.rem(460);
+  padding: 8% 0 0;
+  margin: auto;
+
+  &__form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 100%;
+    margin: 0 auto u.rem(100);
+    padding: u.rem(45);
+    text-align: center;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 5px;
+  }
+}
+
+.form-group {
+  margin-bottom: u.rem(20);
+}
+
+.form-label {
+  color: var(--blue);
+  text-align: left;
+  display: block;
+  margin-bottom: u.rem(8);
+}
+
+.form-input {
+  outline: 0;
+  background: var(--sand);
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 2px solid transparent;
+
+  &:focus {
+    border-color: var(--lightBlue);
+  }
+}
+
+
+.form-error {
+  color: var(--red);
+  font-size: u.rem(14);
+  display: block;
+  margin-block: u.rem(5);
+  text-align: left;
+}

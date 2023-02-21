@@ -33,6 +33,7 @@ const app = (0, express_1.default)();
 app.use(i18next_http_middleware_1.default.handle(i18next_1.default));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
+app.use('/uploads/files', express_1.default.static(path_1.default.join('uploads', 'files')));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

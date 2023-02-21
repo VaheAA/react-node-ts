@@ -16,6 +16,6 @@ const Message = db_1.default.define('message', {
     date: { type: sequelize_1.DataTypes.STRING },
     witness: { type: sequelize_1.DataTypes.STRING },
     message: { type: sequelize_1.DataTypes.TEXT },
-    filePath: { type: sequelize_1.DataTypes.STRING }
+    filePath: { type: sequelize_1.DataTypes.STRING },
 });
 exports.default = Message;

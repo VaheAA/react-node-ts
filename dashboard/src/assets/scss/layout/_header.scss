@@ -1,0 +1,40 @@
+@use '../util' as u;
+
+.header {
+  background-color: var(--blue);
+  padding-block: u.rem(10);
+
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__nav-list {
+    display: flex;
+    align-items: center;
+    gap: u.rem(32);
+  }
+
+  &__nav-item {
+    padding: u.rem(1);
+  }
+
+  &__nav-link {
+    color: var(--white);
+    font-size: u.rem(18);
+  }
+}
+
+.logo {
+  display: block;
+  max-width: u.rem(125);
+  background-color: var(--sand);
+  padding: u.rem(2);
+  border-radius: 5px;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}

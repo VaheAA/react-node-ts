@@ -12,8 +12,8 @@ const Message = sequelize.define('message', {
   date: { type: DataTypes.STRING },
   witness: { type: DataTypes.STRING },
   message: { type: DataTypes.TEXT },
-  filePath: { type: DataTypes.STRING }
-});
-
+  filePath: { type: DataTypes.STRING },
+}
+);
 
 export default Message;
