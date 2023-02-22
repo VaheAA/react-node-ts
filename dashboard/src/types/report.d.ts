@@ -12,3 +12,7 @@ export interface IMessage {
   updatedAt?: string;
 }
 
+export interface IReport {
+  count: number;
+  rows: IMessage[];
+}

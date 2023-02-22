@@ -1,45 +1,61 @@
-import { ReactElement, useEffect, useMemo } from 'react';
-import { useTable, Column, CellProps } from 'react-table';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTable, Column, CellProps, usePagination } from 'react-table';
 import { useReportStore } from '../store/reportStore';
 import LoadingSpinner from '../components/ui/LoadinSpinner';
 import { IMessage } from '../types/report';
+import Pagination from '../components/table/Pagination';
 
 
 const Dashboard: React.FC = () => {
-  const report = useReportStore(state => state.report);
+  const rows = useReportStore(state => state.rows);
+  const count = useReportStore(state => state.count);
   const getMessages = useReportStore(state => state.getMessages);
+  const exportReport = useReportStore(state => state.exportReport);
   const isLoading = useReportStore(state => state.isLoading);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    getMessages();
-  }, []);
 
-  const reportData = useMemo(() => report ? [...report] : [], [report]);
-  const reportColumns: Column<IMessage>[] = useMemo(() => report ? Object.keys(report[0]).map(key => {
+
+  const reportData = useMemo(() => rows ? [...rows] : [], [rows]);
+  const reportColumns: Column<IMessage>[] = useMemo(() => rows ? Object.keys(rows[0]).map(key => {
     if (key === 'filePath') {
       return {
         Header: key as keyof IMessage,
         accessor: key as keyof IMessage,
-        Cell: ({ value }: CellProps<IMessage>): ReactElement => <a href={`${import.meta.env.VITE_STATIC_URL}/${value}`} download>Download file</a>
+        Cell: ({ value }: CellProps<IMessage>) => value ? (<a href={`${import.meta.env.VITE_STATIC_URL}/${value}`} download>Download file</a>) : null
       };
     }
     return {
       Header: key as keyof IMessage,
       accessor: key as keyof IMessage
     };
-  }) : [], [report]);
+  }) : [], [rows]);
 
 
 
-  const tableInstance = useTable<IMessage>({ columns: reportColumns, data: reportData });
+  const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, } = useTable<IMessage>({ columns: reportColumns, data: reportData, manualPagination: true }, usePagination);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+
+  const fetchData = useCallback(() => {
+    getMessages(currentPage, 15);
+  }, [currentPage]);
+
+  useEffect(() => {
+    fetchData();
+
+  }, [currentPage]);
+
+
+  const handleExport = async () => {
+    await exportReport();
+  };
 
   return (
     <div className="dasboard">
       {isLoading && <LoadingSpinner />}
       <div className="container">
         <div className="dashboard__inner">
+          <button onClick={handleExport} className="btn btn-export">Export</button>
           <table className="table" {...getTableProps()}>
             <thead className="table__header">
               {headerGroups.map((headerGroup, index) => (
@@ -53,17 +69,18 @@ const Dashboard: React.FC = () => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
+              {page.map((row: any) => {
                 prepareRow(row);
 
                 return <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
+                  {row.cells.map((cell: any) => (
                     <td key={cell.getCellProps().key}>{cell.render("Cell")}</td>
                   ))}
                 </tr>;
               })}
             </tbody>
           </table>
+          <Pagination totalRows={count} pageChangeHandler={setCurrentPage} rowsPerPage={15} />
         </div>
       </div>
     </div>

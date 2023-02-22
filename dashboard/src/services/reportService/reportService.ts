@@ -1,11 +1,23 @@
-import { IMessage } from '../../types/report';
+import { IMessage, IReport } from '../../types/report';
 import $reportHost from '.';
 
 
-const getMessages = async (): Promise<IMessage[]> => {
-  const { data } = await $reportHost.get('/');
+const getMessages = async (page: number, limit: number = 5): Promise<IReport> => {
+  const { data } = await $reportHost.get('/', {
+    params: {
+      page,
+      limit
+    }
+  });
+
   return data.messages;
 };
 
+const exportReport = async (): Promise<BlobPart> => {
+  const { data } = await $reportHost.get('/export');
 
-export { getMessages };
+  return data;
+};
+
+
+export { getMessages, exportReport };

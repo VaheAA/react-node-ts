@@ -1,7 +1,7 @@
 table {
   color: #01425e;
   font-family: monospace;
-  font-size: 12px;
+  font-size: 14px;
   text-align: left;
   border-spacing: 0;
   width: 100%;
@@ -14,14 +14,15 @@ th {
   background-color: #01425e;
   color: white;
   border: 1px solid #ebedef;
-  padding: 5px 5px;
+  padding: 7px 7px;
   vertical-align: middle;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 th {
   max-width: 150px;
+  text-transform: capitalize;
 }
 
 tr {
@@ -30,7 +31,7 @@ tr {
 
 td {
   border: 1px solid #ebedef;
-  padding: 5px 5px;
+  padding: 7px 7px;
   vertical-align: middle;
   font-weight: 600;
 }

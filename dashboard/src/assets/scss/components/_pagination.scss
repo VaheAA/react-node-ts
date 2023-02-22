@@ -1,0 +1,29 @@
+@use '../util' as u;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: u.rem(16);
+  margin-top: u.rem(24);
+  justify-content: flex-end;
+
+  &-btn {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: u.rem(4) u.rem(8);
+    cursor: pointer;
+
+
+    &:disabled {
+      pointer-events: none;
+      background-color: var(--sand);
+      color: var(--blue);
+      opacity: 0.25;
+    }
+
+    &--active {
+      background-color: var(--sand);
+      color: var(--blue);
+    }
+  }
+}

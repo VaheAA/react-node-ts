@@ -22,4 +22,13 @@
       transform: scale(0.99);
     }
   }
+
+  &-export {
+    background-color: var(--red);
+    padding: u.rem(4) u.rem(8);
+    color: var(--white);
+    margin-bottom: u.rem(15);
+    margin-left: auto;
+    display: block;
+  }
 }

@@ -16,4 +16,6 @@ const Message = sequelize.define('message', {
 }
 );
 
+
+
 export default Message;
