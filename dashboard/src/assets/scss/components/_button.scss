@@ -25,10 +25,25 @@
 
   &-export {
     background-color: var(--red);
-    padding: u.rem(4) u.rem(8);
+    padding: u.rem(8);
     color: var(--white);
-    margin-bottom: u.rem(15);
-    margin-left: auto;
     display: block;
+    align-self: baseline;
+  }
+
+  &-filter {
+    background-color: var(--blue);
+    padding: u.rem(8);
+    color: var(--white);
+    display: block;
+    align-self: baseline;
+
+
+    &:disabled {
+      pointer-events: none;
+      background-color: var(--sand);
+      color: var(--blue);
+      opacity: 0.25;
+    }
   }
 }

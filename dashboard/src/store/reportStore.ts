@@ -9,7 +9,7 @@ interface IReportState {
   isLoading: boolean;
   error: AxiosResponse | null;
   count: number;
-  getMessages: (page: number, limit: number) => Promise<void>;
+  getMessages: (page: number, limit: number, rest?: any) => Promise<void>;
   exportReport: () => Promise<void>;
 }
 
@@ -19,10 +19,10 @@ export const useReportStore = create<IReportState>((set) => ({
   isLoading: false,
   error: null,
   count: 0,
-  getMessages: async (page: number, limit: number) => {
+  getMessages: async (page: number, limit: number, rest: any) => {
     try {
       set(() => ({ isLoading: true }));
-      const { rows, count } = await getMessages(page, limit);
+      const { rows, count } = await getMessages(page, limit, rest);
       set(() => ({
         rows: rows,
         count: count,

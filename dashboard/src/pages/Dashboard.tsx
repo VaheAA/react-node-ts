@@ -4,6 +4,7 @@ import { useReportStore } from '../store/reportStore';
 import LoadingSpinner from '../components/ui/LoadinSpinner';
 import { IMessage } from '../types/report';
 import Pagination from '../components/table/Pagination';
+import Filter from '../components/table/Filter';
 
 
 const Dashboard: React.FC = () => {
@@ -12,12 +13,13 @@ const Dashboard: React.FC = () => {
   const getMessages = useReportStore(state => state.getMessages);
   const exportReport = useReportStore(state => state.exportReport);
   const isLoading = useReportStore(state => state.isLoading);
+  const [showFilters, setShowFilters] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
 
 
 
-  const reportData = useMemo(() => rows ? [...rows] : [], [rows]);
-  const reportColumns: Column<IMessage>[] = useMemo(() => rows ? Object.keys(rows[0]).map(key => {
+  const reportData = useMemo(() => rows && rows.length > 0 ? [...rows] : [], [rows]);
+  const reportColumns: Column<IMessage>[] = useMemo(() => rows && rows.length > 0 ? Object.keys(rows[0]).map(key => {
     if (key === 'filePath') {
       return {
         Header: key as keyof IMessage,
@@ -30,7 +32,6 @@ const Dashboard: React.FC = () => {
       accessor: key as keyof IMessage
     };
   }) : [], [rows]);
-
 
 
   const { getTableProps, getTableBodyProps, headerGroups, page, prepareRow, } = useTable<IMessage>({ columns: reportColumns, data: reportData, manualPagination: true }, usePagination);
@@ -50,12 +51,21 @@ const Dashboard: React.FC = () => {
     await exportReport();
   };
 
+  const toggleFiltersHandler = () => {
+    setShowFilters((prev) => !prev);
+  };
+
   return (
     <div className="dasboard">
       {isLoading && <LoadingSpinner />}
       <div className="container">
         <div className="dashboard__inner">
-          <button onClick={handleExport} className="btn btn-export">Export</button>
+          <h1 className="title">Speak-up report</h1>
+          <div className="dashboard__actions">
+            <button onClick={toggleFiltersHandler} className="btn btn-filter">Filters</button>
+            <button onClick={handleExport} className="btn btn-export">Export</button>
+          </div>
+          {showFilters && <Filter />}
           <table className="table" {...getTableProps()}>
             <thead className="table__header">
               {headerGroups.map((headerGroup, index) => (

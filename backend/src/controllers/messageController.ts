@@ -1,9 +1,10 @@
-import e, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import Message from '../models/message';
 import { sendEmail } from '../utils/nodemailer';
 import * as csv from 'fast-csv';
+import Sequelize from 'sequelize';
 
-
+const Op = Sequelize.Op;
 const sendMessage = async (req: Request, res: Response) => {
   const newMessage = req.body;
   const { t } = req;
@@ -17,15 +18,34 @@ const sendMessage = async (req: Request, res: Response) => {
 
 const getAllMessages = async (req: Request, res: Response) => {
 
-  let { limit, page } = (req.query) as any;
+  let { limit, page, id, email, name, phone, category, status, period, message } = (req.query) as any;
 
   page = page || 1;
   limit = limit || 9;
 
   let offset = page * limit - limit;
 
+  let where: any = {};
+  const queryParamsMapping: any = {
+    id: { [Op.like]: `${id}` },
+    email: { [Op.like]: `%${email}%` },
+    name: { [Op.like]: `%${name}%` },
+    phone: { [Op.like]: `%${phone}%` },
+    category: { [Op.like]: `${category}` },
+    status: { [Op.gte]: `${status}` },
+    period: { [Op.gte]: `${period}` },
+    message: { [Op.gte]: `%${message}%` },
+  };
 
-  const messages = await Message.findAndCountAll({ limit: parseInt(limit), offset: offset, attributes: { exclude: ['updatedAt'] } });
+  Object.keys(req.query).forEach((param) => {
+    if (queryParamsMapping[param]) {
+      where[param] = queryParamsMapping[param];
+    }
+  });
+
+  const messages = await Message.findAndCountAll({
+    limit: parseInt(limit), offset: offset, attributes: { exclude: ['updatedAt'] }, where
+  });
 
 
   res.status(200).json({ messages });

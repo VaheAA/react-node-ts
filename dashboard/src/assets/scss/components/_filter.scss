@@ -1,0 +1,20 @@
+@use '../util' as u;
+
+
+.filter {
+
+  margin-block: u.rem(25);
+
+  &-form {
+    display: flex;
+    gap: u.rem(20);
+  }
+
+  &-fields {
+    display: flex;
+    max-width: u.rem(850);
+    gap: u.rem(20);
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}

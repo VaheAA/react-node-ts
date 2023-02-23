@@ -44,6 +44,10 @@
   &:focus {
     border-color: var(--lightBlue);
   }
+
+  &-filter {
+    padding: u.rem(8);
+  }
 }
 
 

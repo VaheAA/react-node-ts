@@ -2,11 +2,13 @@ import { IMessage, IReport } from '../../types/report';
 import $reportHost from '.';
 
 
-const getMessages = async (page: number, limit: number = 5): Promise<IReport> => {
+
+const getMessages = async (page: number, limit: number = 5, rest: any): Promise<IReport> => {
   const { data } = await $reportHost.get('/', {
     params: {
       page,
-      limit
+      limit,
+      ...rest
     }
   });
 

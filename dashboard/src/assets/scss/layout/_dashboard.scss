@@ -1,0 +1,15 @@
+@use '../util' as u;
+
+
+.dashboard {
+  padding-block: u.rem(16);
+
+  &__inner {}
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: u.rem(16);
+    padding-block: u.rem(10);
+  }
+}
