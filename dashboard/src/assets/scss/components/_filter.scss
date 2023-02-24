@@ -2,12 +2,19 @@
 
 
 .filter {
-
   margin-block: u.rem(25);
+  align-self: stretch;
 
   &-form {
     display: flex;
+    flex-direction: column;
     gap: u.rem(20);
+    height: 100%;
+
+
+    .btn {
+      align-self: flex-end;
+    }
   }
 
   &-fields {

@@ -4,12 +4,19 @@
 .dashboard {
   padding-block: u.rem(16);
 
-  &__inner {}
-
   &__actions {
     display: flex;
     justify-content: flex-end;
     gap: u.rem(16);
     padding-block: u.rem(10);
+  }
+
+  &__tools {
+    padding-block: u.rem(32);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    gap: u.rem(24);
   }
 }

@@ -1,0 +1,6 @@
+@use '../util' as u;
+
+
+.chart-container {
+  width: min(100% - u.rem(20), u.rem(400));
+}
