@@ -1,16 +1,22 @@
-import React from 'react';
 import { IMessage } from '../types/report';
 
 
-export const useChart = (rows: IMessage[]) => {
+type FilterType = {
+  status: string;
+  category: string;
+};
+
+
+
+export const useChart = (rows: IMessage[], filterType: keyof FilterType) => {
 
   let labelSet = new Set();
   rows?.map(row => {
-    labelSet.add(row.category);
+    labelSet.add(row[filterType]);
   });
 
   const dataCount = rows?.reduce((acc: any, obj: any) => {
-    acc[obj.category] = (acc[obj.category] || 0) + 1;
+    acc[obj.filterType] = (acc[obj.filterType] || 0) + 1;
     return acc;
   }, {}) || [];
 

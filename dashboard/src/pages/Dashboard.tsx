@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTable, Column, CellProps, usePagination } from 'react-table';
 import { useReportStore } from '../store/reportStore';
 import LoadingSpinner from '../components/ui/LoadinSpinner';
@@ -11,6 +11,12 @@ import { useChart } from '../hooks/useChart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+type FilterType = {
+  status: string;
+  category: string;
+};
+
+
 const Dashboard: React.FC = () => {
   const rows = useReportStore(state => state.rows);
   const count = useReportStore(state => state.count);
@@ -20,8 +26,9 @@ const Dashboard: React.FC = () => {
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [showCharts, setShowCharts] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedChartType, setSelectedChartType] = useState<keyof FilterType>('category');
 
-  const { data } = useChart(rows!);
+  const { data } = useChart(rows!, selectedChartType);
 
 
   const reportData = useMemo(() => rows && rows.length > 0 ? [...rows] : [], [rows]);
@@ -65,6 +72,10 @@ const Dashboard: React.FC = () => {
     setShowCharts((prev) => !prev);
   };
 
+  const chartTypeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedChartType(e.target.value);
+  };
+
   return (
     <div className="dasboard">
       {isLoading && <LoadingSpinner />}
@@ -79,8 +90,18 @@ const Dashboard: React.FC = () => {
           <div className="dashboard__tools">
             {showCharts && <div className="chart-container">
               <Doughnut width="100%" height="100%" data={data} />
+              <div className="chart-actions">
+                <label className="form-label" htmlFor="chart">Chart by</label>
+                <select name="chart" onChange={chartTypeHandler} value={selectedChartType}>
+                  <option value="category">Category</option>
+                  <option value="status">Status</option>
+                </select>
+              </div>
             </div>}
-            {showFilters && <Filter />}
+            {showFilters && (
+
+              <Filter />
+            )}
           </div>
           <table className="table" {...getTableProps()}>
             <thead className="table__header">
